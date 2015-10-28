@@ -6,14 +6,14 @@ Template.post.events({
 		console.log(event);
         event.preventDefault();
         PostsList.insert({
-            title: "title",
-            body: "body",
+            title: event.target.postTitle.value,
+            body: event.target.postBody.value,
             tags: "tag1, tag2",
             createdAt: new Date()
         });
         /*var playerNameVar = event.target.playerName.value;
         Meteor.call('insertPlayerData', playerNameVar);*/
         console.log(window);
-        window.location.pathname = "/postsList"
+        window.location.pathname = "/"
     }
 });
