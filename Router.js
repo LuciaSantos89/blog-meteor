@@ -2,7 +2,7 @@ Router.route('/admin', function() {
     this.render('admin');
 });
 
-Router.route('/post', function() {
+Router.route('/admin/post', function() {
     this.render('post');
 });
 

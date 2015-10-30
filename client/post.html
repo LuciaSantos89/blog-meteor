@@ -7,9 +7,9 @@
 		<form accept-charset="utf-8">
 			<div>
 				<label for="">Post Title</label>
-				<input type="text" id="postTitle" value="">
+				<input type="text" id="postTitle" value="" required>
 			</div>
-			<div class="file-field input-field">
+			<!--div class="file-field input-field">
 				<div class="btn">
 					<span>File</span>
 					<input type="file">
@@ -17,14 +17,23 @@
 				<div class="file-path-wrapper">
 					<input class="file-path validate" type="text">
 				</div>
+			</div-->
+			<div>
+				<label for="">Post Image</label>
+				 {{> upload_bootstrap fileTypes='.jpg' contentType='images' callbacks=myCallbacks }}
 			</div>
 			<div>
 				<label for="">Post Body</label>
 				<textarea class="materialize-textarea" id="postBody"></textarea>
 			</div>
+			{{#each tags}}
+			<span class="chip" id="{{this}}">
+				{{this}}<i class="material-icons delete-tag">close</i>
+			</span>
+			{{/each}}
 			<div>
 				<label for="">Tags</label>
-				<input type="text" name="" value="">
+				<input type="text" id="postTags" value="">
 			</div>
 			<div>
 				<a class="waves-effect btn cancel-post">Cancel</a>

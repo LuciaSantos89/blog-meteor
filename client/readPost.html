@@ -1,8 +1,14 @@
 <template name="readPost">
 <div class="container">
-	<h3>{{title}}</h3>
-	<p>{{body}}</p>
+	<h3 class="center">{{title}}</h3>
+	<div class="center"><img class="center" src="{{imageUrl}}"></div>
+	<p >{{{body}}}</p>
+	<label>Tags:</label>
+	{{#each tags}}
+	<div class="chip" id="{{this}}">
+		{{this}}
+	</div>
+	{{/each}}
 </div>
-	{{> shareit}}
-
+{{> shareit}}
 </template>

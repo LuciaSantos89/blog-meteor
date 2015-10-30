@@ -21,3 +21,5 @@ insecure                # Allow all DB writes from clients (for prototyping)
 materialize:materialize@=0.97.0
 iron:router
 liberation:shareit
+tomi:upload-server
+tomi:upload-jquery
