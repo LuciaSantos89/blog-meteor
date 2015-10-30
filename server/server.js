@@ -1,10 +1,9 @@
 Meteor.startup(function () {
   UploadServer.init({
-    tmpDir: '/home/lucia/Documents/blog-meteor/client/public/images/tmp',
-    uploadDir: '/home/lucia/Documents/blog-meteor/client/public/images',
+    tmpDir: process.env.PWD + '/.uploads/tmp',
+    uploadDir: process.env.PWD + '/.uploads/',
     checkCreateDirectories: true,
     getDirectory: function(fileInfo, formData) {
-      // create a sub-directory in the uploadDir based on the content type (e.g. 'images')
       return formData.contentType;
     },
     cacheTime: 100,

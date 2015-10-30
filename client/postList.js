@@ -3,5 +3,3 @@ Template.postsList.helpers({
 		return PostsList.find();
 	}
 });
-
-
