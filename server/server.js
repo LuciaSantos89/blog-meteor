@@ -1,7 +1,7 @@
 Meteor.startup(function () {
   UploadServer.init({
-    tmpDir: 'https://lucia-meteorblog.herokuapp.com/images/tmp',
-    uploadDir: 'https://lucia-meteorblog.herokuapp.com/images',
+    tmpDir: process.env.PWD + '/.uploads/tmp',
+    uploadDir: process.env.PWD + '/.uploads/',
     checkCreateDirectories: true,
     getDirectory: function(fileInfo, formData) {
       // create a sub-directory in the uploadDir based on the content type (e.g. 'images')
