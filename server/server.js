@@ -1,7 +1,7 @@
 Meteor.startup(function () {
   UploadServer.init({
-    tmpDir: '/client/public/images/tmp',
-    uploadDir: '/client/public/images',
+    tmpDir: '/public/images/tmp',
+    uploadDir: '/public/images',
     checkCreateDirectories: true,
     getDirectory: function(fileInfo, formData) {
       // create a sub-directory in the uploadDir based on the content type (e.g. 'images')
