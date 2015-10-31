@@ -1,8 +1,16 @@
-Router.route('/admin', function() {
-    this.render('admin');
+Router.route('admin', {
+    onBeforeAction: function() {
+        var currentUser = Meteor.userId();
+        if (currentUser) {
+            this.render('admin');
+        } else {
+            Router.go("admin/login");
+        }
+    }
+
 });
 
-Router.route('/admin/post', function() {
+Router.route('admin/post', function() {
     this.render('post');
 });
 
@@ -11,7 +19,7 @@ Router.route('/', function() {
     this.render('postsList');
 });
 
-Router.route('/post/:_id', function() {
+Router.route('post/:_id', function() {
     this.layout('layout');
     this.render('readPost', {
         data: function() {
@@ -20,4 +28,12 @@ Router.route('/post/:_id', function() {
             });
         }
     });
+});
+
+Router.route('admin/login', function() {
+    this.render('login');
+});
+
+Router.route('admin/register', function() {
+    this.render('register');
 });

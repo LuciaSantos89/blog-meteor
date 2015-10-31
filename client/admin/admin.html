@@ -1,16 +1,31 @@
 <template name="admin">
-	<nav>
-    <div class="nav-wrapper">
-      <a href="#!" class="right brand-logo">Blog</a>
-      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-      <ul class="left hide-on-med-and-down">
-        <li><a href="user">Users</a></li>
-        <li><a href="post">Posts</a></li>
-      </ul>
-      <ul class="side-nav" id="mobile-demo">
-        <li><a href="user">Users</a></li>
-        <li><a href="post">Posts</a></li>
-      </ul>
-    </div>
-  </nav>
+<nav>
+  <div class="nav-wrapper">
+    <a href="#!" class="left brand-logo">Blog</a>
+    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+    <ul class="right hide-on-med-and-down">
+      <li>{{user.username}}</li>
+      <li><a href="{{pathFor route='admin/userss'}}">Users</a></li>
+      <li><a href="{{pathFor route='admin'}}">Posts</a></li>
+      {{#if user}}
+        <li><a href="" class="logout">Logout</a></li>
+      {{else}}
+        <li><a class="login" href="{{pathFor route='admin/login'}}">Login</a></li>
+      {{/if}}
+    </ul>
+    <ul class="side-nav" id="mobile-demo">
+      <li><a href="user">Users</a></li>
+      <li><a href="post">Posts</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <h2>Posts</h2>
+  <ul>
+    <li><a href="{{pathFor route='admin/post'}}">Create Post</a></li>
+    {{#each posts}}
+    <li><a href="/post/{{_id}}" class="post">{{title}}</a><a href="" class="delete-post"><i class="material-icons">delete</i></a><a href="" class="edit-post"><i class="material-icons">edit</i></a> </li>
+    {{/each}}
+  </ul>
+</div>
 </template>
