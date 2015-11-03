@@ -1,4 +1,7 @@
 Router.route('admin', {
+    data:{
+       user: function(){return Meteor.user()} 
+    },
     onBeforeAction: function() {
         var currentUser = Meteor.userId();
         if (currentUser) {
