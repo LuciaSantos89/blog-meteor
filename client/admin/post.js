@@ -1,6 +1,7 @@
-var tags = []
+console.log(this);
+var tags = [];
 Session.setDefault('tags', tags);
-var imageUrl="";
+var imageUrl = "";
 
 Template.post.events({
     'keypress #postTags': function(event) {
@@ -18,21 +19,25 @@ Template.post.events({
         Session.set('tags', tags);
     },
     'click .cancel-post': function() {
-        console.log("aqui si");
+        Router.go('admin');
     },
     'submit form': function(event) {
-        console.log(Session.get('tags'));
         event.preventDefault();
-        PostsList.insert({
+        post = {
             title: event.target.postTitle.value,
             body: event.target.postBody.value,
             tags: tags,
             imageUrl: imageUrl,
-            createdAt: new Date()
-        });
-        /*var playerNameVar = event.target.playerName.value;
-        Meteor.call('insertPlayerData', playerNameVar);*/
-        window.location.pathname = "/"
+            createdAt: new Date(),
+            createdBy: Meteor.user().usename
+        };
+        var postId = Router.current().params._id;
+        if (postId) {
+            Meteor.call('updatePost', post, postId);
+        } else {
+            Meteor.call('insertPost', post);
+        }
+        Router.go('admin');
     }
 });
 
@@ -44,8 +49,7 @@ Template.post.helpers({
         return {
             finished: function(index, fileInfo, context) {
                 imageUrl = fileInfo.url;
-                console.log($('.upload-control.done'));
-                $('.upload-control.done').remove();
+                $('html').find('.uploadPhoto .imgPreview').attr("src", imageUrl);
             }
         }
     }

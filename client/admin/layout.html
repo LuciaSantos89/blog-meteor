@@ -1,2 +1,35 @@
 <template name="adminLayout">
+<nav>
+	<div class="nav-wrapper">
+		<div class="container">
+			<a href="#!" class="left brand-logo">Blog</a>
+			<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+			<ul class="right hide-on-med-and-down">
+				{{#if user}}
+				<li>{{user.username}}</li>
+				<!--li><a href="{{pathFor route='admin/users'}}">Users</a></li-->
+				<li><a href="{{pathFor route='admin'}}">Posts</a></li>
+				<li><a href="" class="logout">Logout</a></li>
+				{{/if}}
+			</ul>
+			<ul class="side-nav" id="mobile-demo">
+				<li><a href="user">Users</a></li>
+				<li><a href="post">Posts</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+<main>
+<div class="container">
+	{{> yield}}
+</div>
+</main>
+<footer class="page-footer">
+	<div class="container">Soy un footer</div>
+	<div class="footer-copyright">
+		<div class="container">
+			© 2014 Copyright Text
+		</div>
+	</div>
+</footer>
 </template>

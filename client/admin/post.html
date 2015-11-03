@@ -7,37 +7,40 @@
 		<form accept-charset="utf-8">
 			<div>
 				<label for="">Post Title</label>
-				<input type="text" id="postTitle" value="" required>
+				<input type="text" id="postTitle" value="{{post.title}}" required>
+
 			</div>
-			<!--div class="file-field input-field">
-				<div class="btn">
-					<span>File</span>
-					<input type="file">
-				</div>
-				<div class="file-path-wrapper">
-					<input class="file-path validate" type="text">
-				</div>
-			</div-->
-			<div>
+			<div class="uploadPhoto">
 				<label for="">Post Image</label>
 				 {{> upload_bootstrap fileTypes='.jpg' contentType='images' callbacks=myCallbacks }}
+					<img src="{{post.imageUrl}} " width='150' heigth='auto' class="imgPreview">
+
 			</div>
 			<div>
 				<label for="">Post Body</label>
-				<textarea class="materialize-textarea" id="postBody"></textarea>
+				<textarea class="materialize-textarea" id="postBody" >{{post.body}}</textarea>
+
 			</div>
+			{{#if post}}
+			{{#each post.tags}}
+			<span class="chip" id="{{this}}">
+				{{this}}<i class="material-icons delete-tag">close</i>
+			</span>
+			{{/each}}
+			{{else}}
 			{{#each tags}}
 			<span class="chip" id="{{this}}">
 				{{this}}<i class="material-icons delete-tag">close</i>
 			</span>
 			{{/each}}
+			{{/if}}
 			<div>
 				<label for="">Tags</label>
 				<input type="text" id="postTags" value="">
 			</div>
 			<div>
 				<a class="waves-effect btn cancel-post">Cancel</a>
-				<button class="btn waves-effect waves-light" type="submit" >Submit
+				<button class="btn waves-effect waves-light" type="submit" >{{#if post}}Update Post {{else}}Create Post{{/if}}
 				<i class="material-icons right">send</i>
 				</button>
 			</div>

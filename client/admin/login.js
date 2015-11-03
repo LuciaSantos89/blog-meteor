@@ -10,7 +10,7 @@ Template.login.events({
 
         Meteor.loginWithPassword(email, password, function(error) {
             if (error) {
-                console.log(error); // Output error if registration fails
+                console.log(error.reason); // Output error if registration fails
             } else {
                 Router.go("admin"); // Redirect user if registration succeeds
             }
@@ -37,7 +37,7 @@ Template.register.events({
     }
 });
 
-Template.admin.events({
+Template.adminLayout.events({
 	'click .logout':function(event){
 		Meteor.logout();
 	}

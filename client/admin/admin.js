@@ -1,4 +1,4 @@
-Template.admin.events({
+Template.adminLayout.events({
     'click .button-collapse': function() {
         $(".button-collapse").sideNav();
     },
@@ -9,14 +9,8 @@ Template.admin.events({
     }
 });
 
-Template.admin.helpers({
-    'user': function() {
-        console.log(Meteor.user())
-        return Meteor.user();
-    },
-    'posts': function() {
-        return PostsList.find();
-    }
+Template.adminLayout.helpers({
+
 });
 
 Template.register.events({
