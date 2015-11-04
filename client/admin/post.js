@@ -57,6 +57,8 @@ Template.post.rendered = function() {
     if(this.data){
         var postBody = this.data.post.body;
         Session.set('tags',this.data.post.tags);
+    }else{
+        Session.set('tags',[])
     }
     
     $(document).ready(function() {
