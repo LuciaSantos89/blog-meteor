@@ -9,6 +9,21 @@
 		{{this}}
 	</div>
 	{{/each}}
+	<div>
+		By: {{createdBy}}
+		</div>
+		<div>
+		At: {{createdAt}}
+	</div>
+
+	<h5>Comments</h5>
+	{{>insertComment}}
+	{{#each comments}}
+		<div>
+			<p>{{name}}:</p>
+			<p>{{createdAt}}</p>
+			<p>{{body}}</p>
+		</div>
+	{{/each}}
 </div>
-{{> shareit}}
 </template>

@@ -1,3 +1,7 @@
+<head>
+	<script src="http://cdn.ckeditor.com/4.5.4/full/ckeditor.js"></script>
+</head>
+
 <template name="post" >
 <div class="container">
 	<div class="row">
@@ -17,23 +21,16 @@
 
 			</div>
 			<div>
-				<label for="">Post Body</label>
-				<textarea class="materialize-textarea" id="postBody" >{{post.body}}</textarea>
+				<label for="bodyPost">Post Body</label>
+				<texarea id="bodyPost" name="bodyPost"></texarea>
+				<!--textarea class="materialize-textarea body-post" id="postBody" >{{post.body}}</textarea-->
 
 			</div>
-			{{#if post}}
-			{{#each post.tags}}
-			<span class="chip" id="{{this}}">
-				{{this}}<i class="material-icons delete-tag">close</i>
-			</span>
-			{{/each}}
-			{{else}}
 			{{#each tags}}
 			<span class="chip" id="{{this}}">
 				{{this}}<i class="material-icons delete-tag">close</i>
 			</span>
 			{{/each}}
-			{{/if}}
 			<div>
 				<label for="">Tags</label>
 				<input type="text" id="postTags" value="">

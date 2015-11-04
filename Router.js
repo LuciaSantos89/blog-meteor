@@ -14,7 +14,7 @@ Router.onBeforeAction(function() {
         Router.go("admin/login");
     }
 }, {
-    only: ['admin', 'admin/post', 'admin/user','admin/post/:_id']
+    only: ['admin', 'admin/post', 'admin/user', 'admin/post/:_id']
 });
 
 Router.route('admin', {
@@ -45,17 +45,19 @@ Router.route('admin/post', function() {
     this.render('post');
 });
 
-Router.route('admin/post/:_id', function() {
-    this.layout('adminLayout');
-    this.render('post', {
-        data: function() {
-            return {
-                post: PostsList.findOne({
-                    _id: this.params._id
-                })
-            };
-        }
-    });
+Router.route('admin/post/:_id', {
+    layoutTemplate: 'adminLayout',
+    data: function() {
+        return {
+            post: PostsList.findOne({
+                _id: this.params._id
+            })
+        };
+    },
+    action: function() {
+        this.render('post');
+    }
+
 });
 
 

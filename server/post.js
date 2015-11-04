@@ -12,6 +12,17 @@ Meteor.methods({
         });
     },
     'updatePost': function(post, postId) {
-        PostsList.update(postId, post);
+        PostsList.update({
+            _id: postId
+        }, post);
+    },
+    'insertComment': function(comment, postId) {
+        PostsList.update({
+            _id: postId
+        }, {
+            $addToSet: {
+                comments: comment
+            }
+        });
     }
 });

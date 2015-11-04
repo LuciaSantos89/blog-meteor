@@ -1,12 +1,10 @@
-console.log(this);
-var tags = [];
-Session.setDefault('tags', tags);
 var imageUrl = "";
 
 Template.post.events({
     'keypress #postTags': function(event) {
         if (event.keyCode == 32) {
             if ($.trim(event.target.value).length > 0) {
+                tags = Session.get('tags');
                 tags.push(event.target.value);
                 Session.set('tags', tags);
                 event.target.value = "";
@@ -25,11 +23,11 @@ Template.post.events({
         event.preventDefault();
         post = {
             title: event.target.postTitle.value,
-            body: event.target.postBody.value,
-            tags: tags,
+            body: $('#bodyPost').editable('getHTML'),
+            tags: Session.get('tags'),
             imageUrl: imageUrl,
             createdAt: new Date(),
-            createdBy: Meteor.user().usename
+            createdBy: Meteor.user().username
         };
         var postId = Router.current().params._id;
         if (postId) {
@@ -54,3 +52,21 @@ Template.post.helpers({
         }
     }
 });
+
+Template.post.rendered = function() {
+    if(this.data){
+        var postBody = this.data.post.body;
+        Session.set('tags',this.data.post.tags);
+    }
+    
+    $(document).ready(function() {
+        $('#bodyPost').editable({
+            inlineMode: false
+        });
+        if (postBody) {
+            $('#bodyPost').editable('setHTML', postBody)
+        } else {
+            console.log("notengo");
+        }
+    });
+}

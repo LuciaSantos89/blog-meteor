@@ -17,6 +17,7 @@ Template.login.events({
         });
     }
 });
+
 Template.register.events({
     'submit form': function(event) {
         event.preventDefault();
@@ -30,15 +31,8 @@ Template.register.events({
             if (error) {
                 console.log(error); // Output error if registration fails
             } else {
-                 // Redirect user if registration succeeds
+                Router.go("admin"); // Redirect user if registration succeeds
             }
         });
-        Router.go("admin");
     }
-});
-
-Template.adminLayout.events({
-	'click .logout':function(event){
-		Meteor.logout();
-	}
 });
