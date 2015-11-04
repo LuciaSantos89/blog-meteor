@@ -56,7 +56,7 @@ Template.post.helpers({
 Template.post.rendered = function() {
     if(this.data){
         var postBody = this.data.post.body;
-        Session.set('tags',this.data.post.tags);
+        this.data.post.tags ? Session.set('tags',this.data.post.tags) : Session.set('tags',[]);
     }else{
         Session.set('tags',[])
     }
