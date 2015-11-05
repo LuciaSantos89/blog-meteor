@@ -17,7 +17,7 @@ Router.onBeforeAction(function() {
     only: ['admin', 'admin/post', 'admin/user', 'admin/post/:_id']
 });
 
-Router.route('admin', {
+Router.route('/admin', {
     layoutTemplate: 'adminLayout',
     template: 'listPost',
     data: {
@@ -30,22 +30,22 @@ Router.route('admin', {
     }
 });
 
-Router.route('admin/login', function() {
+Router.route('/admin/login', function() {
     this.layout('adminLayout');
     this.render('login');
 });
 
-Router.route('admin/register', function() {
+Router.route('/admin/register', function() {
     this.layout('adminLayout');
     this.render('register');
 });
 
-Router.route('admin/post', function() {
+Router.route('/admin/post', function() {
     this.layout('adminLayout');
     this.render('post');
 });
 
-Router.route('admin/post/:_id', {
+Router.route('/admin/post/:_id', {
     layoutTemplate: 'adminLayout',
     data: function() {
         return {
@@ -66,13 +66,23 @@ Router.route('/', function() {
     this.render('postsList');
 });
 
-Router.route('post/:_id', function() {
+Router.route('/post/:_id', function() {
     this.layout('layout');
     this.render('readPost', {
         data: function() {
             return PostsList.findOne({
                 _id: this.params._id
             });
+        }
+    });
+});
+
+Router.route('/tag', function() {
+    this.layout('layout');
+    this.render('postsList', {
+        data: function() {
+            var tag = this.params.hash;
+            return PostsList.find({}, {tags:{$elemMatch:{$lt:tag}}});
         }
     });
 });
