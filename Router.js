@@ -14,7 +14,7 @@ Router.onBeforeAction(function() {
         Router.go("admin/login");
     }
 }, {
-    only: ['admin', 'admin/post', 'admin/user', 'admin/post/:_id']
+    only: ['/admin', '/admin/post', '/admin/user', '/admin/post/:_id']
 });
 
 Router.route('/admin', {
@@ -63,16 +63,31 @@ Router.route('/admin/post/:_id', {
 
 Router.route('/', function() {
     this.layout('layout');
-    this.render('postsList');
+    this.render('postsList', {
+        data: function() {
+            return {
+                posts: PostsList.find({}, {
+                    sort: {
+                        comments: 1
+                    }
+                })
+            }
+        }
+    });
 });
 
 Router.route('/post/:_id', function() {
     this.layout('layout');
     this.render('readPost', {
         data: function() {
-            return PostsList.findOne({
-                _id: this.params._id
-            });
+            return {
+                post: PostsList.findOne({
+                    _id: this.params._id
+                }),
+                relatedPosts: PostsList.find({
+                    tags: "post"
+                })
+            }
         }
     });
 });
@@ -82,7 +97,11 @@ Router.route('/tag', function() {
     this.render('postsList', {
         data: function() {
             var tag = this.params.hash;
-            return PostsList.find({}, {tags:{$elemMatch:{$lt:tag}}});
+            return {
+                posts: PostsList.find({
+                    tags: tag
+                })
+            }
         }
     });
 });

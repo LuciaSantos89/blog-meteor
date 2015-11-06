@@ -12,8 +12,3 @@ ShareIt.init({
     applyColors: false
 });
 
-Template.postsList.helpers({
-    'posts': function() {
-        return PostsList.find();
-    }
-});

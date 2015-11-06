@@ -1,12 +1,12 @@
 <template name="listPost">
 	<h2>Posts</h2>
   <ul>
-    <li><a href="{{pathFor route='admin/post'}}">Create Post</a></li>
+    <li><a href="{{pathFor route='/admin/post'}}">Create Post</a></li>
     {{#each posts}}
     <li id='{{_id}}'>
 	    <a href="/post/{{_id}}" class="post">{{title}}</a>
 	    <a href="" class="delete-post"><i class="material-icons">delete</i></a>
-	    <a href="admin/post/{{_id}}" class="edit-post"><i class="material-icons">edit</i></a> 
+	    <a href="/admin/post/{{_id}}" class="edit-post"><i class="material-icons">edit</i></a> 
     </li>
     {{/each}}
   </ul>

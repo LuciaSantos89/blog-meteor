@@ -1,24 +1,34 @@
 <template name="readPost">
 <div class="container">
-	<h3 class="center">{{title}}</h3>
-	<div class="center"><img class="center" src="{{imageUrl}}"></div>
-	<p >{{{body}}}</p>
+	<h3 class="center">{{post.title}}</h3>
+	<div class="center"><img class="center" src="{{post.imageUrl}}"></div>
+	<p >{{{post.body}}}</p>
 	<label>Tags:</label>
-	{{#each tags}}
+	{{#each post.tags}}
 	<div class="chip" id="{{this}}">
 		<a href="/tag#{{this}}">{{this}}</a>
 	</div>
 	{{/each}}
 	<div>
-		By: {{createdBy}}
+		By: {{post.createdBy}}
 		</div>
 		<div>
-		At: {{createdAt}}
+		At: {{post.createdAt}}
 	</div>
 {{>shareit}}
+
+<h5>RelatedPosts</h5>
+{{#each relatedPosts}}
+<a href="/post/{{_id}}">
+<div>
+	<p>{{title}}</p>
+	<p>{{body}}</p>
+</div>
+</a>
+{{/each}}
 	<h5>Comments</h5>
 	{{>insertComment}}
-	{{#each comments}}
+	{{#each post.comments}}
 		<div>
 			<p>{{name}}:</p>
 			<p>{{createdAt}}</p>
