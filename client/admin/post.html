@@ -32,14 +32,18 @@
 			</span>
 			{{/each}}
 			<div>
-				<label for="">Tags</label>
+				<label for="postTags">Tags</label>
 				<input type="text" id="postTags" value="">
 			</div>
 			<div>
+				<input type="checkbox" id="draft" checked="{{post.draft}}"><label for="draft">Draft</label>
+			</div>
+			<div>
 				<a class="waves-effect btn cancel-post">Cancel</a>
-				<button class="btn waves-effect waves-light" type="submit" >{{#if post}}Update Post {{else}}Create Post{{/if}}
+				<button class="btn waves-effect waves-light create" type="submit" >{{#if post}}Update Post {{else}}Create Post{{/if}}
 				<i class="material-icons right">send</i>
 				</button>
+
 			</div>
 			
 		</form>

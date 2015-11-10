@@ -16,6 +16,15 @@ Meteor.methods({
             _id: postId
         }, post);
     },
+    'publishPost': function(postId) {
+        PostsList.update({
+            _id: postId
+        }, {
+            $set : {
+                draft: false
+            }
+        });
+    },
     'insertComment': function(comment, postId) {
         PostsList.update({
             _id: postId

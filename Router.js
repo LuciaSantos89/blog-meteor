@@ -1,10 +1,12 @@
 Router.configure({
+    notFoundTemplate: 'appNotFound',
     waitOn: function() {
         return [
             Meteor.subscribe('PostsList')
         ];
     }
 });
+
 
 Router.onBeforeAction(function() {
     var currentUser = Meteor.userId();
@@ -66,31 +68,31 @@ Router.route('/', function() {
     this.render('postsList', {
         data: function() {
             return {
-                posts: PostsList.find({}, {
-                    sort: {
-                        comments: 1
-                    }
+                posts: PostsList.find({
+                    draft: false
                 })
             }
         }
     });
 });
 
-Router.route('/post/:_id', function() {
-    this.layout('layout');
-    this.render('readPost', {
-        data: function() {
-            return {
-                post: PostsList.findOne({
-                    _id: this.params._id
-                }),
-                relatedPosts: PostsList.find({
-                    tags: "post"
-                })
-            }
+Router.route('/post/:_id', {
+    layoutTemplate: 'layout',
+    template: 'readPost',
+    data: function() {
+        var post = PostsList.findOne({
+            _id: this.params._id,
+            draft: false
+        });
+        if (!post) {
+            this.render('appNotFound');
         }
-    });
+        return {
+            post: post
+        }
+    }
 });
+
 
 Router.route('/tag', function() {
     this.layout('layout');

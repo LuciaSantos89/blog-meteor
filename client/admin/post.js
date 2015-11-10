@@ -19,13 +19,14 @@ Template.post.events({
     'click .cancel-post': function() {
         Router.go('admin');
     },
-    'submit form': function(event) {
+    'submit form ': function(event) {
         event.preventDefault();
         post = {
             title: event.target.postTitle.value,
             body: $('#bodyPost').editable('getHTML'),
             tags: Session.get('tags'),
             imageUrl: imageUrl,
+            draft:event.target.draft.checked,
             createdAt: new Date(),
             createdBy: Meteor.user().username
         };
