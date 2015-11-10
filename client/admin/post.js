@@ -5,7 +5,7 @@ Template.post.events({
         if (event.keyCode == 32) {
             if ($.trim(event.target.value).length > 0) {
                 tags = Session.get('tags');
-                tags.push(event.target.value);
+                tags.push($.trim(event.target.value));
                 Session.set('tags', tags);
                 event.target.value = "";
             }
