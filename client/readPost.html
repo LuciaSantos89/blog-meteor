@@ -11,29 +11,36 @@
 	{{/each}}
 	<div>
 		By: {{post.createdBy}}
-		</div>
-		<div>
+	</div>
+	<div>
 		At: {{post.createdAt}}
 	</div>
-{{>shareit}}
-
-<h5>RelatedPosts</h5>
-{{#each relatedPosts}}
-<a href="/post/{{_id}}">
-<div>
-	<p>{{title}}</p>
-	<p>{{{body}}}</p>
-</div>
-</a>
-{{/each}}
-	<h5>Comments</h5>
-	{{>insertComment}}
-	{{#each post.comments}}
+	{{>shareit}}
+	{{#if relatedPosts}}
+	<h5>RelatedPosts</h5>
+	{{#each relatedPosts}}
+	<a href="/post/{{_id}}">
+		<div>
+			<p>{{title}}</p>
+			<p>{{{body}}}</p>
+		</div>
+	</a>
+	{{/each}}
+	{{/if}}
+	
+	<div>
+		<h5>Comments</h5>
+		{{>insertComment}}
+		{{#if post.comments}}
+		{{#each post.comments}}
 		<div>
 			<p>{{name}}:</p>
 			<p>{{createdAt}}</p>
 			<p>{{{body}}}</p>
 		</div>
-	{{/each}}
+		{{/each}}
+		{{/if}}
+	</div>
+	
 </div>
 </template>

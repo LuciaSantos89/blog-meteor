@@ -4,11 +4,13 @@ Template.readPost.helpers({
         return PostsList.find({
             draft: false,
             tags: {
-                $in : tags
+                $in: tags
             },
             _id: {
                 $ne: this.post._id
             }
-        })
+        }, {
+            limit: 3
+        });
     }
 });
