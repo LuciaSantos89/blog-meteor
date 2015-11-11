@@ -12,6 +12,7 @@ Template.post.events({
         }
     },
     'click .delete-tag': function(event) {
+        tags = Session.get('tags');
         var indexTag = tags.indexOf(event.target.parentNode.id);
         tags.splice(indexTag, 1);
         Session.set('tags', tags);
